@@ -1,0 +1,6 @@
+1689910536265	Rename type 'UserInfoDao'
+1689910837614	Rename type 'PostgreSQL'
+1689910843516	Rename type 'Oracle'
+1689911413845	Rename type 'UserInfoOracleDAO'
+1689911423509	Rename type 'UserInfoPostgreSQLDAO'
+1689922432096	Rename package 'kr.co.himedia.interface1'

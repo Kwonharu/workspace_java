@@ -1,0 +1,14 @@
+package kr.co.himedia.list;
+
+public class Member {
+	
+	private int memberId;
+	private String memberName;
+	
+	public Member(int memberId, String memberName) {
+		//super();
+		this.memberId = memberId;
+		this.memberName = memberName;
+	}
+	
+}

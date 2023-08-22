@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Move package &apos;review&apos; to &apos;Chap05(iteration)/src/kr.co.himedia.loop&apos;&#x0D;&#x0A;- Original project: &apos;Chap00(Hi)&apos;&#x0D;&#x0A;- Destination element: &apos;Chap05(iteration)/src/kr.co.himedia.loop&apos;&#x0D;&#x0A;- Original element: &apos;Chap00(Hi)/src/review&apos;&#x0D;&#x0A;- Update references to refactored element" description="Move package" destination="=Chap05\(iteration)/src&lt;kr.co.himedia.loop" element1="/src&lt;review" flags="589830" fragments="1" id="org.eclipse.jdt.ui.move" policy="org.eclipse.jdt.ui.movePackages" stamp="1688949994020" version="1.0"/>
+</session>

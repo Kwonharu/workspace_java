@@ -1,0 +1,13 @@
+package kr.co.himedia.list;
+
+import java.util.ArrayList;
+
+public class MemberArrayList {
+
+	private ArrayList<Member> arrayList;
+	
+	public MemberArrayList() {
+		arrayList = new ArrayList<Member>();
+	}
+	
+}

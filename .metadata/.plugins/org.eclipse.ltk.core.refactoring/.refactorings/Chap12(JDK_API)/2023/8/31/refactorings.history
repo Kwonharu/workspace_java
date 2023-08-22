@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Move element &apos;RunnableInterface.java&apos; to &apos;Chap19(Thread)/src/kr.co.himedia.thread&apos;&#x0D;&#x0A;- Original project: &apos;Chap12(JDK_API)&apos;&#x0D;&#x0A;- Destination element: &apos;Chap19(Thread)/src/kr.co.himedia.thread&apos;&#x0D;&#x0A;- Original element: &apos;RunnableInterface.java&apos;&#x0D;&#x0A;- Update references to refactored element" description="Move compilation unit" destination="=Chap19\(Thread)/src&lt;kr.co.himedia.thread" element1="/src&lt;{RunnableInterface.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.move" policy="org.eclipse.jdt.ui.moveResources" qualified="false" references="true" stamp="1691113538263" units="1" version="1.0"/>
+</session>

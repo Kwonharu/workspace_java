@@ -1,0 +1,21 @@
+package kr.co.himedia.decisionIf;
+
+public class IfTest {
+	public static void main(String[] args) {
+		
+		int num = 100;
+		
+		if(num > 50) {
+			System.out.println("num 변수의 값이 50보다 큽니다");
+		}
+		
+		//한 줄만 실행 시 중괄호 생략 가능 + 같은 줄에 작성 가능
+		if(num > 60)System.out.println("num 변수의 값이 60보다 큽니다");
+		
+		//
+		if(num < 50) 
+			System.out.println(num);
+			System.out.println("중괄호 생략은 한 줄만 적용");
+		
+	}
+}
