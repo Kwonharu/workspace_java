@@ -48,6 +48,7 @@ public class Main {
 		String inputName = null;
 		String inputHp = null;
 		String inputCompany = null;
+		int inputPersonId = 0;
 		
 		while(inputNum != 6){
 			System.out.println();
@@ -64,7 +65,7 @@ public class Main {
 			} catch (InputMismatchException e) {
 				scan = new Scanner(System.in);
 				System.out.println("[정수만 입력하세요.]");
-				break;
+				//화면 초기화 방법 없나
 			}
 
 		    try{
@@ -83,13 +84,29 @@ public class Main {
 		    		}
 
 		    	}else if(inputNum == 2) {
-				    inputName = scan.nextLine();
-				    inputHp = scan.nextLine();
-				    inputCompany = scan.nextLine();
 		    		System.out.println("<2. 등록>");
-		    		personDao.personInsert("김두한", "010-1918-0623", "02-1972-1121");
-		    		System.out.println(count + " insert");
-		    		
+		    		System.out.print(">이름: ");
+		    		inputName = scan.nextLine();
+		    		System.out.print(">휴대전화: ");
+				    inputHp = scan.nextLine();
+				    System.out.print(">회사전화: ");
+				    inputCompany = scan.nextLine();
+		    		count = personDao.personInsert(inputName, inputHp, inputCompany);
+		    		if(count != -1) {
+		    			System.out.println("[등록되었습니다.]");	
+		    			inputName = null;
+		    			inputHp = null;
+		    			inputCompany = null;
+		    		}
+		    	}else if(inputNum == 3) {
+		    		System.out.println("<3. 삭제>");
+		    		System.out.print(">번호: ");
+		    		inputPersonId = scan.nextInt();
+					scan.nextLine();
+					count = personDao.personDelete(inputPersonId);
+					if(count != -1) {
+						System.out.println("[삭제되었습니다.]");
+					}
 		    	}
 		    }catch(Exception e){
 		        scan.reset(); //Exception이 발생해도 중지되지 않고 계속 입력을 받을 수 있도록 처리
