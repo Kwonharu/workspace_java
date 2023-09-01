@@ -209,7 +209,7 @@ public class PersonDao {
 	
 	}
 	
-	public List<PersonVo> personSearch(String word) {
+	public List<PersonVo> personSelect(String word) {
 		
 		List<PersonVo> personList = new ArrayList<PersonVo>();
 		

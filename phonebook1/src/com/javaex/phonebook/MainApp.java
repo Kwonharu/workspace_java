@@ -3,14 +3,14 @@ package com.javaex.phonebook;
 import java.util.List;
 import java.util.Scanner;
 
-public class Main {
+public class MainApp {
 	public static void main(String[] args) {
 		
 		PersonDao personDao = new PersonDao();
 		int count = -1;
 		
 		Scanner scan = new Scanner(System.in);
-
+		
 //		List<PersonVo> personList = personDao.personSelect();		
 //		for(int i=0; i<personList.size(); i++) {
 //			System.out.println(personList.get(i).getPerson_id());
@@ -48,7 +48,8 @@ public class Main {
 		String inputName = null;
 		String inputHp = null;
 		String inputCompany = null;
-		int inputPersonId = 0;
+		String inputPersonId = null;
+		int tempNum = 0;
 		
 		while(true){
 			System.out.println();
@@ -58,17 +59,14 @@ public class Main {
 			
 			inputNum = scan.nextLine();
 			
+			//select *
     		if("1".equals(inputNum)) {
 	    		System.out.println("<1. 리스트>");
 	    		List<PersonVo> personList = personDao.personSelect();	
 	 
-	    		for(int i=0; i<personList.size(); i++) {
-	    			System.out.println(personList.get(i).getPerson_id()+"."+"\t"
-	    							   +personList.get(i).getName()+"\t"
-	    							   +personList.get(i).getHp()+"\t"
-	    							   +personList.get(i).getCompany());
-	    		}
+	    		printList(personList);
 
+	    	//insert
 	    	}else if("2".equals(inputNum)) {
 	    		System.out.println("<2. 등록>");
 	    		System.out.print(">이름: ");
@@ -79,19 +77,37 @@ public class Main {
 			    inputCompany = scan.nextLine();
 			    
 	    		count = personDao.personInsert(inputName, inputHp, inputCompany);
-	    		if(count != -1) {
+	    		String countString = Integer.toString(count);
+	    		if("1".equals(countString) || "0".equals(countString)) {
 	    			System.out.println("[등록되었습니다.]");	
+	    		}else {
+		    		System.out.println("[잘못된 입력입니다.]");
 	    		}
+	    		
 	    	}else if("3".equals(inputNum)) {
 	    		System.out.println("<3. 삭제>");
 	    		System.out.print(">번호: ");
-	    		inputPersonId = scan.nextInt();
-				scan.nextLine();
-				
-				count = personDao.personDelete(inputPersonId);
-				if(count != -1) {
-					System.out.println("[삭제되었습니다.]");
-				}
+	    		
+	    		//숫자만 받고 싶다
+	    		inputPersonId = scan.nextLine();
+	    		//입력받은 값이 숫자인지 확인 -> 을 어캐하누 대체 
+	    	    try {
+	    	    	tempNum = Integer.parseInt(inputPersonId);
+	    	    	
+					count = personDao.personDelete(tempNum);
+					//executeUpdate()
+					//- 삭제 성공 시 : 1 반환
+					//- 값이 없지만 query는 작동: 0 반환
+		    		if(count == 1) {
+						System.out.println("[삭제되었습니다.]");
+					}
+		    		else {
+			    		System.out.println("[해당하는 번호가 없습니다.]");
+		    		}
+	    	      } catch (NumberFormatException e) {
+	    	    	  System.out.println("[잘못된 값입니다.]");
+	    	      }
+
 	    	}else if("4".equals(inputNum)) {
 	    		System.out.println("<4. 수정>");
 	    		System.out.print(">이름: ");
@@ -101,29 +117,34 @@ public class Main {
 			    System.out.print(">회사전화: ");
 			    inputCompany = scan.nextLine();
 			    System.out.print(">수정할 번호: ");
-			    inputPersonId = scan.nextInt();
-				scan.nextLine();
-				
-	    		count = personDao.personUpdate(inputName, inputHp, inputCompany, inputPersonId);
-	    		if(count == 1) {
-					System.out.println("[수정되었습니다.]");
-				}
-				
+	    		inputPersonId = scan.nextLine();
+	    		
+	    		//입력받은 값이 숫자인지 확인 -> 을 어캐하누 대체 
+	    	    try {
+	    	    	tempNum = Integer.parseInt(inputPersonId);
+	    	    	
+		    		count = personDao.personUpdate(inputName, inputHp, inputCompany, tempNum);
+		    		if(count == 1) {
+						System.out.println("[삭제되었습니다.]");
+					}
+		    		else {
+			    		System.out.println("[해당하는 번호가 없습니다.]");
+		    		}
+	    	      } catch (NumberFormatException e) {
+	    	    	  System.out.println("[잘못된 값입니다.]");
+	    	      }
+
+	    	//search
 	    	}else if("5".equals(inputNum)) {
 	    		System.out.println("<5. 검색>");
 	    		System.out.print(">이름: ");
 	    		inputName = scan.nextLine();
 	    		
-	    		List<PersonVo> personSearch = personDao.personSearch(inputName);
-	    		if(personSearch.isEmpty()) {
+	    		List<PersonVo> personList = personDao.personSelect(inputName);
+	    		if(personList.isEmpty()) {
 	    			System.out.println("[읎서요.]");
 	    		}else {
-		    		for(int i=0; i<personSearch.size(); i++) {
-		    			System.out.println(personSearch.get(i).getPerson_id()+"."+"\t"
-		    							   +personSearch.get(i).getName()+"\t"
-		    							   +personSearch.get(i).getHp()+"\t"
-		    							   +personSearch.get(i).getCompany());
-		    		}
+	    			printList(personList);
 	    		}
 	    	}else if("6".equals(inputNum)) {
 	    		scan.close();
@@ -137,6 +158,15 @@ public class Main {
 		
 
 		
+	}
+	
+	private static void printList(List<PersonVo> personList) {
+		for(int i=0; i<personList.size(); i++) {
+			System.out.println(personList.get(i).getPerson_id()+"."+"\t"
+							   +personList.get(i).getName()+"\t"
+							   +personList.get(i).getHp()+"\t"
+							   +personList.get(i).getCompany());
+		}
 	}
 	
 }
