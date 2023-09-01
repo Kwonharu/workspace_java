@@ -50,7 +50,7 @@ public class Main {
 		String inputCompany = null;
 		int inputPersonId = 0;
 		
-		while(!"6".equals(inputCompany)){
+		while(true){
 			System.out.println();
 			System.out.println("1.리스트	2.등록	3.삭제	4.수정	5.검색	6.종료");
 			System.out.println("----------------------------------------------");
@@ -105,7 +105,7 @@ public class Main {
 				scan.nextLine();
 				
 	    		count = personDao.personUpdate(inputName, inputHp, inputCompany, inputPersonId);
-	    		if(count != -1) {
+	    		if(count == 1) {
 					System.out.println("[수정되었습니다.]");
 				}
 				
@@ -125,14 +125,17 @@ public class Main {
 		    							   +personSearch.get(i).getCompany());
 		    		}
 	    		}
+	    	}else if("6".equals(inputNum)) {
+	    		scan.close();
+	    		System.out.println("= = = = = = = = = 프로그램 종료 = = = = = = = = =");
+	    		break;
 	    	}else {
 	    		System.out.println("[잘못된 입력입니다.]");
 	    	}
 
 		} //while(!"6".equals(inputNum))
 		
-		scan.close();
-		System.out.println("= = = = = = = = = 프로그램 종료 = = = = = = = = =");
+
 		
 	}
 	
