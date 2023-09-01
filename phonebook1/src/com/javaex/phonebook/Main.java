@@ -36,6 +36,7 @@ public class Main {
 //		count = personDao.personDelete(6);
 //		System.out.println(count + " delete");
 		
+		
 //		count = personDao.personUpdate("심영", "010-1910-0903", "02-1971-0724", 7);
 //		System.out.println(count + " update");
 
@@ -52,7 +53,7 @@ public class Main {
 		
 		while(inputNum != 6){
 			System.out.println();
-			System.out.println("1.리스트	2.등록	3.삭제	4.검색	5.수정	6.종료");
+			System.out.println("1.리스트	2.등록	3.삭제	4.수정	5.검색	6.종료");
 			System.out.println("----------------------------------------------");
 			System.out.print(">메뉴번호: ");
 			
@@ -91,23 +92,56 @@ public class Main {
 				    inputHp = scan.nextLine();
 				    System.out.print(">회사전화: ");
 				    inputCompany = scan.nextLine();
+				    
 		    		count = personDao.personInsert(inputName, inputHp, inputCompany);
 		    		if(count != -1) {
 		    			System.out.println("[등록되었습니다.]");	
-		    			inputName = null;
-		    			inputHp = null;
-		    			inputCompany = null;
 		    		}
 		    	}else if(inputNum == 3) {
 		    		System.out.println("<3. 삭제>");
 		    		System.out.print(">번호: ");
 		    		inputPersonId = scan.nextInt();
 					scan.nextLine();
+					
 					count = personDao.personDelete(inputPersonId);
 					if(count != -1) {
 						System.out.println("[삭제되었습니다.]");
 					}
+		    	}else if(inputNum == 4) {
+		    		System.out.println("<4. 수정>");
+		    		System.out.print(">이름: ");
+		    		inputName = scan.nextLine();
+		    		System.out.print(">휴대전화: ");
+				    inputHp = scan.nextLine();
+				    System.out.print(">회사전화: ");
+				    inputCompany = scan.nextLine();
+				    System.out.print(">수정할 번호: ");
+				    inputPersonId = scan.nextInt();
+					scan.nextLine();
+					
+		    		count = personDao.personUpdate(inputName, inputHp, inputCompany, inputPersonId);
+		    		if(count != -1) {
+						System.out.println("[수정되었습니다.]");
+					}
+					
+		    	}else if(inputNum == 5) {
+		    		System.out.println("<5. 검색>");
+		    		System.out.print(">이름: ");
+		    		inputName = scan.nextLine();
+		    		
+		    		List<PersonVo> personSearch = personDao.personSearch(inputName);
+		    		if(personSearch.isEmpty()) {
+		    			System.out.println("읎서요.");
+		    		}else {
+			    		for(int i=0; i<personSearch.size(); i++) {
+			    			System.out.println(personSearch.get(i).getPerson_id()+"."+"\t"
+			    							   +personSearch.get(i).getName()+"\t"
+			    							   +personSearch.get(i).getHp()+"\t"
+			    							   +personSearch.get(i).getCompany());
+			    		}
+		    		}
 		    	}
+	    		
 		    }catch(Exception e){
 		        scan.reset(); //Exception이 발생해도 중지되지 않고 계속 입력을 받을 수 있도록 처리
 		    }

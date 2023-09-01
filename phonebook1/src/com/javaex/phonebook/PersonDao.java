@@ -69,6 +69,7 @@ public class PersonDao {
 		    query += "         hp, ";
 		    query += "         company ";
 		    query += " from person ";
+		    query += " order by person_id asc ";
 			
 		    pstmt = conn.prepareStatement(query);
 		    
@@ -223,6 +224,7 @@ public class PersonDao {
 		    query += "         company ";
 		    query += " from person ";
 		    query += " where name like '%' || ? || '%' ";
+		    query += " order by person_id asc ";
 			
 		    pstmt = conn.prepareStatement(query);
 		    
